@@ -1,4 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
 
 const Layout = () => {
   return (
@@ -8,7 +9,9 @@ const Layout = () => {
         <Link to="/catalog">catalog</Link>
         <Link to="/favorites">favorites</Link>
       </div>
-      <Outlet />
+      <Suspense fallback={null}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
