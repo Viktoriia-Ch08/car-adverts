@@ -1,7 +1,20 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Home from './pages/Home/Home';
+import Favorites from './pages/Favorites/Favorites';
+import Catalog from './pages/Catalog/Catalog';
+import Layout from './components/Layout/Layout';
 
 function App() {
-  return <div>hello</div>;
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/favorites" element={<Favorites />} />
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;
