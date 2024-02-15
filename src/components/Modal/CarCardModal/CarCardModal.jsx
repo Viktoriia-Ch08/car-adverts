@@ -1,13 +1,15 @@
 import { nanoid } from 'nanoid';
+import defaultImage from '../../../assets/images/defaultImg.png';
+import { useState } from 'react';
 
 const CarCardModal = ({ advert, address }) => {
+  const [imgUrl, setImgUrl] = useState(advert.img);
   const {
     id,
     year,
     make,
     model,
     type,
-    img,
     description,
     fuelConsumption,
     engineSize,
@@ -23,7 +25,15 @@ const CarCardModal = ({ advert, address }) => {
   return (
     <>
       <div>
-        <img src={img} alt={`${make} ${model}`} />
+        <img
+          src={imgUrl}
+          onError={() => {
+            setImgUrl(defaultImage);
+          }}
+          alt={`${make} ${model}`}
+          width={'250px'}
+          height={'200px'}
+        />
       </div>
       <h2>
         {make} <span>{model}</span> {year}
