@@ -10,5 +10,5 @@ export default defineConfig({
     pages: '/src/pages',
     assets: '/src/assets',
   },
-  base: 'car-adverts',
+  base: '/car-adverts/',
 });
