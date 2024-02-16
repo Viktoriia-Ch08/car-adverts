@@ -1,17 +1,18 @@
-import { useSelector } from 'react-redux';
-import { selectAdverts } from '../../redux/selectors';
 import CatalogListItem from './CatalogListItem/CatalogListItem';
 import { nanoid } from 'nanoid';
 import { CatalogCards } from './CatalogList.styled';
 
-const CatalogList = () => {
-  const adverts = useSelector(selectAdverts);
-
+const CatalogList = ({ data, favorite, setFavorite }) => {
   return (
     <CatalogCards>
-      {adverts.map(advert => {
+      {data.map(advert => {
         return (
-          <CatalogListItem advert={advert} key={`${advert.id}${nanoid()}`} />
+          <CatalogListItem
+            advert={advert}
+            key={`${advert.id}${nanoid()}`}
+            favorite={favorite}
+            setFavorite={setFavorite}
+          />
         );
       })}
     </CatalogCards>

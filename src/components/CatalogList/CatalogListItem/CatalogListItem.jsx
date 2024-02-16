@@ -2,9 +2,10 @@ import { useState } from 'react';
 import CarCardModal from '../../Modal/CarCardModal/CarCardModal';
 import UniversalModal from '../../Modal/UniversalModal';
 import defaultImage from '../../../assets/images/defaultImg.png';
-import { Card } from './CatalogListItem.styled';
+import { Card, LoveBtn } from './CatalogListItem.styled';
+import { saveToLocalStorage } from '../../../services/localStorage';
 
-const CatalogListItem = ({ advert }) => {
+const CatalogListItem = ({ advert, favorite, setFavorite }) => {
   const [show, setShow] = useState(false);
   const [imgUrl, setImgUrl] = useState(advert.img);
 
@@ -12,9 +13,33 @@ const CatalogListItem = ({ advert }) => {
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+
+  const isFavorite = favorite.some(localCar => localCar.id === advert.id);
+
+  const handleFavorite = () => {
+    if (isFavorite) {
+      removeFromLocalStorage();
+    } else {
+      setFavorite(prev => [...prev, advert]);
+      saveToLocalStorage(advert);
+    }
+  };
+
+  const removeFromLocalStorage = () => {
+    const vehicles = favorite.filter(car => car.id !== advert.id);
+    setFavorite(vehicles);
+    localStorage.setItem('favorite', JSON.stringify(vehicles));
+  };
+
   return (
     <>
       <Card>
+        <LoveBtn
+          onClick={handleFavorite}
+          className={isFavorite ? 'favorite' : ''}
+        >
+          Love
+        </LoveBtn>
         <img
           src={imgUrl}
           onError={() => {

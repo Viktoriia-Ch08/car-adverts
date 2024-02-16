@@ -1,12 +1,8 @@
 import { useSelector } from 'react-redux';
-
-// import { fetchCarByPrice } from '../../redux/operations';
 import Select from 'react-select';
 import { selectPrices } from '../../redux/selectors';
-// import { useEffect } from 'react';
 
 const PriceFilter = ({ selectedOption, setSelectedOption }) => {
-  // const dispatch = useDispatch();
   const prices = useSelector(selectPrices);
   const options = [
     ...prices.map(price => {

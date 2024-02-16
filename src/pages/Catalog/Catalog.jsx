@@ -24,6 +24,7 @@ const Catalog = () => {
   const page = useSelector(selectPage);
   const [chosenMake, setChosenMake] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
+  const [favorite, setFavorite] = useState([]);
 
   const adverts = useSelector(selectAdverts);
   const isLastPage = useSelector(selectIsLastPage);
@@ -57,6 +58,13 @@ const Catalog = () => {
     dispatch(fetchCarByPrice(selectedOption.value));
   }, [dispatch, selectedOption]);
 
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('favorite'));
+    if (items) {
+      setFavorite(items);
+    }
+  }, []);
+
   return (
     <CatalogContainer>
       {adverts.length && (
@@ -67,7 +75,11 @@ const Catalog = () => {
             setChosenMake={setChosenMake}
             chosenMake={chosenMake}
           />
-          <CatalogList />
+          <CatalogList
+            data={adverts}
+            favorite={favorite}
+            setFavorite={setFavorite}
+          />
           <button
             disabled={isLastPage}
             onClick={() => {
