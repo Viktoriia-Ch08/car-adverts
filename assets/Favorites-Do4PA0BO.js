@@ -1,0 +1,1 @@
+import{r as a,j as r}from"./index-BehNVWAH.js";import{C as o}from"./CatalogList-C9uo-0Pb.js";const c=()=>{const[t,e]=a.useState([]);return a.useEffect(()=>{const s=JSON.parse(localStorage.getItem("favorite"));s&&e(s)},[]),r.jsx("div",{children:r.jsx(o,{favorite:t,setFavorite:e,data:t})})};export{c as default};
