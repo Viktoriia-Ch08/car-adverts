@@ -2,8 +2,22 @@ import { useState } from 'react';
 import CarCardModal from '../../Modal/CarCardModal/CarCardModal';
 import UniversalModal from '../../Modal/UniversalModal';
 import defaultImage from '../../../assets/images/defaultImg.png';
-import { Card, LoveBtn } from './CatalogListItem.styled';
+import {
+  Card,
+  CardImage,
+  ImgThumb,
+  InfoCardWrap,
+  InfoText,
+  LearnMoreBtn,
+  LoveBtn,
+  LoveBtnIcon,
+  Model,
+  Price,
+  Title,
+  TitleInfoWrap,
+} from './CatalogListItem.styled';
 import { saveToLocalStorage } from '../../../services/localStorage';
+import icons from '../../../assets/images/sprite.svg';
 
 const CatalogListItem = ({ advert, favorite, setFavorite }) => {
   const [show, setShow] = useState(false);
@@ -15,6 +29,11 @@ const CatalogListItem = ({ advert, favorite, setFavorite }) => {
   const handleClose = () => setShow(false);
 
   const isFavorite = favorite.some(localCar => localCar.id === advert.id);
+
+  const fixMileage = advert.mileage.toString().split('');
+  fixMileage.splice(1, 0, ',');
+
+  const mileageToShow = fixMileage.join('');
 
   const handleFavorite = () => {
     if (isFavorite) {
@@ -34,35 +53,37 @@ const CatalogListItem = ({ advert, favorite, setFavorite }) => {
   return (
     <>
       <Card>
-        <LoveBtn
-          onClick={handleFavorite}
-          className={isFavorite ? 'favorite' : ''}
-        >
-          Love
-        </LoveBtn>
-        <img
-          src={imgUrl}
-          onError={() => {
-            setImgUrl(defaultImage);
-          }}
-          alt={advert.make}
-          width={'100px'}
-          height={'100px'}
-        />
-        <div>
-          <div>
-            <p>
-              {advert.make} {advert.model} {advert.year}
-            </p>
-          </div>
-          <p>{advert.rentalPrice}</p>
-        </div>
-        <div>
-          <p>
-            {`${address} | ${advert.rentalCompany} | ${advert.type} | ${advert.model} | ${advert.mileage} | ${advert.functionalities[0]}`}
-          </p>
-        </div>
-        <button onClick={handleShow}>Learn More</button>
+        <ImgThumb>
+          <LoveBtn
+            onClick={handleFavorite}
+            className={isFavorite ? 'favorite' : ''}
+          >
+            <LoveBtnIcon>
+              <use href={`${icons}#icon-heart`}></use>
+            </LoveBtnIcon>
+          </LoveBtn>
+          <CardImage
+            src={imgUrl}
+            onError={() => {
+              setImgUrl(defaultImage);
+            }}
+            alt={advert.make}
+          />
+        </ImgThumb>
+        <InfoCardWrap>
+          <TitleInfoWrap>
+            <Title>
+              {advert.make} <Model>{advert.model}</Model> {advert.year}
+            </Title>
+            <Price>{advert.rentalPrice}</Price>
+          </TitleInfoWrap>
+
+          <InfoText>
+            {`${address} | ${advert.rentalCompany} | ${advert.type} | ${advert.model} | ${mileageToShow} | ${advert.functionalities[0]}`}
+          </InfoText>
+        </InfoCardWrap>
+
+        <LearnMoreBtn onClick={handleShow}>Learn More</LearnMoreBtn>
       </Card>
       {show && (
         <UniversalModal show={show} handleClose={handleClose}>

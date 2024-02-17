@@ -1,4 +1,5 @@
 import { Modal } from 'react-bootstrap';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const UniversalModal = ({ show, handleClose, children }) => {
   return (

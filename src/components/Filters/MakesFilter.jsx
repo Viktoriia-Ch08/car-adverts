@@ -1,28 +1,22 @@
 import { useSelector } from 'react-redux';
 import { selectMakes } from '../../redux/selectors';
-import { nanoid } from 'nanoid';
+import Select from 'react-select';
 
-const MakesFilter = ({ setChosenMake, chosenMake }) => {
+const MakesFilter = ({ setChosenMake, chosenMake, style }) => {
   const makes = useSelector(selectMakes);
+  const options = [
+    ...makes.map(make => {
+      return { value: make, label: make };
+    }),
+  ];
   return (
-    <div>
-      <select
-        value={chosenMake ? chosenMake : 'DEFAULT'}
-        name="makes"
-        onChange={event => setChosenMake(event.target.value)}
-      >
-        <option disabled value={'DEFAULT'}>
-          Choose car make
-        </option>
-        {makes.map(make => {
-          return (
-            <option value={make} key={nanoid()}>
-              {make}
-            </option>
-          );
-        })}
-      </select>
-    </div>
+    <Select
+      value={chosenMake}
+      onChange={setChosenMake}
+      options={options}
+      styles={style}
+      className="filter-select"
+    />
   );
 };
 

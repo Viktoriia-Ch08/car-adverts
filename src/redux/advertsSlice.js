@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchAdvertsWithLimit,
-  fetchAdvertsByMake,
   fetchMakes,
-  fetchCarByPrice,
+  filterCars,
   fetchAllAdverts,
 } from './operations';
 import { LIMIT_PER_PAGE } from '../config/config';
@@ -43,11 +42,7 @@ const advertSlice = createSlice({
         state.makes = action.payload;
         state.isLoading = false;
       })
-      .addCase(fetchAdvertsByMake.fulfilled, (state, action) => {
-        state.adverts = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(fetchCarByPrice.fulfilled, (state, action) => {
+      .addCase(filterCars.fulfilled, (state, action) => {
         state.adverts = action.payload;
         state.isLoading = false;
       })

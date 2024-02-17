@@ -1,14 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchAdvertsWithLimit,
-  fetchAdvertsByMake,
   fetchMakes,
   fetchAllAdverts,
-  fetchCarByPrice,
+  filterCars,
 } from '../../redux/operations';
 import { useEffect, useState } from 'react';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import CatalogList from '../../components/CatalogList/CatalogList';
 import { refreshAdverts, setPageValue } from '../../redux/advertsSlice';
 import {
@@ -16,14 +14,19 @@ import {
   selectIsLastPage,
   selectPage,
 } from '../../redux/selectors';
-import { CatalogContainer } from './Catalog.styled';
+import {
+  CatalogContainer,
+  CatalogLoadMoreBtn,
+  CatalogLoadMoreBtnIcon,
+} from './Catalog.styled';
 import Filters from '../../components/Filters/Filters';
+import icons from '../../assets/images/sprite.svg';
 
 const Catalog = () => {
   const dispatch = useDispatch();
   const page = useSelector(selectPage);
   const [chosenMake, setChosenMake] = useState('');
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('');
   const [favorite, setFavorite] = useState([]);
 
   const adverts = useSelector(selectAdverts);
@@ -47,50 +50,54 @@ const Catalog = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (chosenMake === '') return;
-    setSelectedOption(null);
-    dispatch(fetchAdvertsByMake(chosenMake));
-  }, [dispatch, chosenMake]);
-
-  useEffect(() => {
-    if (!selectedOption) return;
-    setChosenMake('');
-    dispatch(fetchCarByPrice(selectedOption.value));
-  }, [dispatch, selectedOption]);
-
-  useEffect(() => {
     const items = JSON.parse(localStorage.getItem('favorite'));
     if (items) {
       setFavorite(items);
     }
   }, []);
 
+  useEffect(() => {
+    const price = selectedOption ? selectedOption.value : '';
+    const make = chosenMake ? chosenMake.value : '';
+    dispatch(
+      filterCars({
+        rentalPrice: price,
+        make: make,
+      })
+    );
+  }, [dispatch, chosenMake, selectedOption]);
+
   return (
-    <CatalogContainer>
-      {adverts.length && (
-        <>
-          <Filters
-            selectedOption={selectedOption}
-            setSelectedOption={setSelectedOption}
-            setChosenMake={setChosenMake}
-            chosenMake={chosenMake}
-          />
-          <CatalogList
-            data={adverts}
-            favorite={favorite}
-            setFavorite={setFavorite}
-          />
-          <button
-            disabled={isLastPage}
-            onClick={() => {
-              dispatch(setPageValue(page + 1));
-            }}
-          >
-            Load More
-          </button>
-        </>
-      )}
-    </CatalogContainer>
+    <section className="main-container">
+      <CatalogContainer>
+        {adverts.length && (
+          <>
+            <Filters
+              selectedOption={selectedOption}
+              setSelectedOption={setSelectedOption}
+              setChosenMake={setChosenMake}
+              chosenMake={chosenMake}
+            />
+            <CatalogList
+              data={adverts}
+              favorite={favorite}
+              setFavorite={setFavorite}
+            />
+            <CatalogLoadMoreBtn
+              disabled={isLastPage}
+              onClick={() => {
+                dispatch(setPageValue(page + 1));
+              }}
+            >
+              Load More
+              <CatalogLoadMoreBtnIcon>
+                <use href={`${icons}#icon-upload`}></use>
+              </CatalogLoadMoreBtnIcon>
+            </CatalogLoadMoreBtn>
+          </>
+        )}
+      </CatalogContainer>
+    </section>
   );
 };
 

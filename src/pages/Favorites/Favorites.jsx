@@ -12,13 +12,13 @@ const Favorites = () => {
   }, []);
 
   return (
-    <div>
+    <section className="main-container">
       <CatalogList
         favorite={favorite}
         setFavorite={setFavorite}
         data={favorite}
       />
-    </div>
+    </section>
   );
 };
 

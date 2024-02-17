@@ -30,25 +30,15 @@ export const fetchMakes = createAsyncThunk(
   }
 );
 
-export const fetchCarByPrice = createAsyncThunk(
-  'adverts/fetchCarByPrice',
-  async (price, thunkAPI) => {
+export const filterCars = createAsyncThunk(
+  'adverts/filterCars',
+  async ({ rentalPrice, make }, thunkAPI) => {
     try {
-      const response = await axios.get(`/adverts?search=${price}`);
-      return response.data.filter(
-        element => element.rentalPrice === `$${price}`
+      const response = await axios.get(
+        `/adverts?${rentalPrice && `rentalPrice=${rentalPrice}`}${
+          make && `&make=${make}`
+        }`
       );
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
-export const fetchAdvertsByMake = createAsyncThunk(
-  'adverts/fetchAdvertsByMake',
-  async (title, thunkAPI) => {
-    try {
-      const response = await axios.get(`/adverts?search=${title}`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
