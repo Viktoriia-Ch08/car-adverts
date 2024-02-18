@@ -37,6 +37,8 @@ const advertSlice = createSlice({
       state.adverts = [];
       state.isLoading = false;
       state.page = 1;
+      state.priceFilter = null;
+      state.makeFilter = null;
     },
   },
   extraReducers: builder => {

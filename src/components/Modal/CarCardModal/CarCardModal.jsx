@@ -84,7 +84,7 @@ const CarCardModal = ({ advert, address }) => {
             return <ConditionsText key={nanoid()}>{condition}</ConditionsText>;
           })}
           <ConditionsText>Mileage: {mileageToShow}</ConditionsText>
-          <ConditionsText>Price: {rentalPrice}</ConditionsText>
+          <ConditionsText>Price: ${rentalPrice}</ConditionsText>
         </ConditionsThumb>
         <LinkThumb>
           <ModalLinkRent href="tel:+380730000000">Rent Car</ModalLinkRent>
