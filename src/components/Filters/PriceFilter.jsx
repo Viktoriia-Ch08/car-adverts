@@ -1,19 +1,23 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
-import { selectPrices } from '../../redux/selectors';
+import { selectPriceFilter } from '../../redux/selectors';
+import { setPriceFilterValue } from '../../redux/advertsSlice';
+import { AVAILABLE_PRICES } from '../../config/config';
 
-const PriceFilter = ({ selectedOption, setSelectedOption, style }) => {
-  const prices = useSelector(selectPrices);
+const PriceFilter = ({ style }) => {
+  const priceFilter = useSelector(selectPriceFilter);
+  const dispatch = useDispatch();
+
   const options = [
-    ...prices.map(price => {
+    ...AVAILABLE_PRICES.map(price => {
       return { value: price, label: `$${price}` };
     }),
   ];
 
   return (
     <Select
-      value={selectedOption}
-      onChange={setSelectedOption}
+      value={priceFilter}
+      onChange={e => dispatch(setPriceFilterValue(e))}
       options={options}
       className="filter-select"
       styles={style}

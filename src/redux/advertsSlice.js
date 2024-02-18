@@ -1,10 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import {
-  fetchAdvertsWithLimit,
-  fetchMakes,
-  filterCars,
-  fetchAllAdverts,
-} from './operations';
+import { fetchAdverts, fetchMakes } from './operations';
 import { LIMIT_PER_PAGE } from '../config/config';
 
 const advertSlice = createSlice({
@@ -12,7 +7,8 @@ const advertSlice = createSlice({
   initialState: {
     adverts: [],
     makes: [],
-    prices: [],
+    priceFilter: null,
+    makeFilter: null,
     page: 1,
     isLoading: false,
     error: null,
@@ -22,17 +18,31 @@ const advertSlice = createSlice({
     setPageValue(state, action) {
       state.page = action.payload;
     },
+    resetFilters(state) {
+      state.priceFilter = null;
+      state.makeFilter = null;
+      state.page = 1;
+    },
+    setPriceFilterValue(state, action) {
+      state.adverts = [];
+      state.priceFilter = action.payload;
+      state.page = 1;
+    },
+    setMakeFilterValue(state, action) {
+      state.adverts = [];
+      state.makeFilter = action.payload;
+      state.page = 1;
+    },
     refreshAdverts(state) {
       state.adverts = [];
       state.isLoading = false;
       state.page = 1;
-      state.prices = [];
     },
   },
   extraReducers: builder => {
     builder
 
-      .addCase(fetchAdvertsWithLimit.fulfilled, (state, action) => {
+      .addCase(fetchAdverts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.adverts = [...state.adverts, ...action.payload];
         state.isLastPage = action.payload.length < LIMIT_PER_PAGE;
@@ -41,40 +51,13 @@ const advertSlice = createSlice({
         state.makes = action.payload;
         state.isLoading = false;
       })
-      .addCase(filterCars.fulfilled, (state, action) => {
-        state.adverts = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(fetchAllAdverts.fulfilled, (state, action) => {
-        state.prices = action.payload
-          .map(({ rentalPrice }) => {
-            return rentalPrice.split('$')[1];
-          })
-          .filter((value, index, array) => array.indexOf(value) === index)
-          .sort(function (a, b) {
-            return a - b;
-          });
-        state.isLoading = false;
+
+      .addMatcher(isAnyOf(fetchAdverts.pending, fetchMakes.pending), state => {
+        state.isLoading = true;
+        state.error = null;
       })
       .addMatcher(
-        isAnyOf(
-          fetchAdvertsWithLimit.pending,
-          fetchMakes.pending,
-          filterCars.pending,
-          fetchAllAdverts.pending
-        ),
-        state => {
-          state.isLoading = true;
-          state.error = null;
-        }
-      )
-      .addMatcher(
-        isAnyOf(
-          fetchAdvertsWithLimit.rejected,
-          fetchMakes.rejected,
-          filterCars.rejected,
-          fetchAllAdverts.rejected
-        ),
+        isAnyOf(fetchAdverts.rejected, fetchMakes.rejected),
         (state, action) => {
           state.isLoading = false;
           state.error = action.payload;
@@ -84,4 +67,10 @@ const advertSlice = createSlice({
 });
 
 export const advertsReducer = advertSlice.reducer;
-export const { setPageValue, refreshAdverts } = advertSlice.actions;
+export const {
+  setPageValue,
+  refreshAdverts,
+  setMakeFilterValue,
+  resetFilters,
+  setPriceFilterValue,
+} = advertSlice.actions;

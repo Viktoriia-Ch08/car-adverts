@@ -1,5 +1,4 @@
-import { filterCars } from '../../redux/operations';
-import { failedNotification } from '../../services/notification';
+import { resetFilters } from '../../redux/advertsSlice';
 import {
   FilterButton,
   FiltersBtnWrap,
@@ -10,39 +9,8 @@ import MakesFilter from './MakesFilter';
 import PriceFilter from './PriceFilter';
 import { useDispatch } from 'react-redux';
 
-const Filters = ({
-  setChosenMake,
-  chosenMake,
-  selectedOption,
-  setSelectedOption,
-}) => {
+const Filters = () => {
   const dispatch = useDispatch();
-
-  const handleFilters = () => {
-    const price = selectedOption ? selectedOption.value : '';
-    const make = chosenMake ? chosenMake.value : '';
-    dispatch(
-      filterCars({
-        rentalPrice: price,
-        make: make,
-      })
-    )
-      .unwrap()
-      .catch(() => {
-        failedNotification('Sorry, we didn`t find any cars');
-      });
-  };
-
-  const resetFilters = () => {
-    dispatch(
-      filterCars({
-        rentalPrice: '',
-        make: '',
-      })
-    );
-    setSelectedOption('');
-    setChosenMake('');
-  };
 
   const style = {
     control: base => ({
@@ -55,26 +23,12 @@ const Filters = ({
   return (
     <FiltersThumb>
       <FiltersWrap>
-        <MakesFilter
-          setChosenMake={setChosenMake}
-          chosenMake={chosenMake}
-          style={style}
-        />
-        <PriceFilter
-          selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
-          style={style}
-        />
+        <MakesFilter style={style} />
+        <PriceFilter style={style} />
       </FiltersWrap>
       <FiltersBtnWrap>
-        <FilterButton
-          type="button"
-          onClick={handleFilters}
-          disabled={!chosenMake && !selectedOption}
-        >
-          Search
-        </FilterButton>
-        <FilterButton type="button" onClick={resetFilters}>
+        <FilterButton type="button">Search</FilterButton>
+        <FilterButton type="button" onClick={() => dispatch(resetFilters())}>
           Reset
         </FilterButton>
       </FiltersBtnWrap>

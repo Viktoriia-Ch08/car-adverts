@@ -1,9 +1,13 @@
-import { useSelector } from 'react-redux';
-import { selectMakes } from '../../redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectMakeFilter, selectMakes } from '../../redux/selectors';
 import Select from 'react-select';
+import { setMakeFilterValue } from '../../redux/advertsSlice';
 
-const MakesFilter = ({ setChosenMake, chosenMake, style }) => {
+const MakesFilter = ({ style }) => {
+  const dispatch = useDispatch();
+
   const makes = useSelector(selectMakes);
+  const makeFilter = useSelector(selectMakeFilter);
   const options = [
     ...makes.map(make => {
       return { value: make, label: make };
@@ -11,8 +15,10 @@ const MakesFilter = ({ setChosenMake, chosenMake, style }) => {
   ];
   return (
     <Select
-      value={chosenMake}
-      onChange={setChosenMake}
+      value={makeFilter}
+      onChange={e => {
+        dispatch(setMakeFilterValue(e));
+      }}
       options={options}
       styles={style}
       className="filter-select"

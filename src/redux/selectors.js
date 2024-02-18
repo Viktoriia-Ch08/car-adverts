@@ -9,10 +9,16 @@ export const selectIsLastPage = createSelector(
   selectCars,
   cars => cars.isLastPage
 );
-export const selectPrices = createSelector(selectCars, cars => cars.prices);
 export const selectIsLoading = createSelector(
   selectCars,
   cars => cars.isLoading
 );
 
-export const selectError = createSelector(selectCars, cars => cars.error);
+export const selectPriceFilter = createSelector(
+  selectCars,
+  cars => cars.priceFilter
+);
+export const selectMakeFilter = createSelector(
+  selectCars,
+  cars => cars.makeFilter
+);

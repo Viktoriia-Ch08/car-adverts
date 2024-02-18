@@ -1,9 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchAdvertsWithLimit,
-  fetchMakes,
-  fetchAllAdverts,
-} from '../../redux/operations';
+import { fetchAdverts, fetchMakes } from '../../redux/operations';
 import { useEffect, useState } from 'react';
 
 import CatalogList from '../../components/CatalogList/CatalogList';
@@ -13,7 +9,9 @@ import {
   selectAdverts,
   selectIsLastPage,
   selectIsLoading,
+  selectMakeFilter,
   selectPage,
+  selectPriceFilter,
 } from '../../redux/selectors';
 import {
   CatalogContainer,
@@ -33,19 +31,22 @@ const Catalog = () => {
   const adverts = useSelector(selectAdverts);
   const isLastPage = useSelector(selectIsLastPage);
   const isLoading = useSelector(selectIsLoading);
+  const makeFilter = useSelector(selectMakeFilter);
+  const priceFilter = useSelector(selectPriceFilter);
 
   useEffect(() => {
     dispatch(refreshAdverts());
   }, [dispatch]);
 
   useEffect(() => {
-    setPageValue(1);
-    dispatch(fetchAdvertsWithLimit(page));
-  }, [dispatch, page]);
-
-  useEffect(() => {
-    dispatch(fetchAllAdverts());
-  }, [dispatch]);
+    dispatch(
+      fetchAdverts({
+        page,
+        rentalPrice: priceFilter?.value,
+        make: makeFilter?.value,
+      })
+    );
+  }, [dispatch, page, makeFilter, priceFilter]);
 
   useEffect(() => {
     dispatch(fetchMakes());
