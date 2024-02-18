@@ -5,7 +5,6 @@ import {
   ModalCloseBtn,
   ModalIcon,
 } from './UniversalModal.styled';
-import { ModalBody } from 'react-bootstrap';
 import icons from '../../assets/images/sprite.svg';
 import { removeScrollLock } from '../../services/bodyScroll';
 
@@ -32,7 +31,7 @@ const UniversalModal = ({ children, setShow }) => {
   };
   return (
     <Backdrop onClick={handleBackdropClick}>
-      <ModalBody className="modal-body">
+      <div className="modal-body">
         <CloseBtnThumb>
           <ModalCloseBtn
             onClick={() => {
@@ -46,7 +45,7 @@ const UniversalModal = ({ children, setShow }) => {
           </ModalCloseBtn>
         </CloseBtnThumb>
         {children}
-      </ModalBody>
+      </div>
     </Backdrop>
   );
 };

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { device } from '../../../css/deviceSizes';
 
 export const ModalBodyThumb = styled.div`
-  padding-top: 60px;
+  padding-top: 45px;
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 10px;

@@ -29,7 +29,7 @@ export const CloseBtnThumb = styled.div`
 
 export const ModalCloseBtn = styled.button`
   position: absolute;
-  top: 20px;
+  top: 15px;
   right: 20px;
   transform: fill var(--hover-focus-trans);
 
