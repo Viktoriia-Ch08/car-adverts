@@ -16,6 +16,7 @@ const PriceFilter = ({ style }) => {
 
   return (
     <Select
+      placeholder="To $"
       value={priceFilter}
       onChange={e => dispatch(setPriceFilterValue(e))}
       options={options}

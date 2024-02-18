@@ -15,6 +15,7 @@ const MakesFilter = ({ style }) => {
   ];
   return (
     <Select
+      placeholder="Enter the car model"
       value={makeFilter}
       onChange={e => {
         dispatch(setMakeFilterValue(e));
