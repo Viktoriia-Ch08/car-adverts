@@ -27,7 +27,6 @@ const Filters = () => {
         <PriceFilter style={style} />
       </FiltersWrap>
       <FiltersBtnWrap>
-        <FilterButton type="button">Search</FilterButton>
         <FilterButton type="button" onClick={() => dispatch(resetFilters())}>
           Reset
         </FilterButton>

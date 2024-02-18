@@ -21,6 +21,10 @@ import {
 
 const CarCardModal = ({ advert, address }) => {
   const [imgUrl, setImgUrl] = useState(advert.img);
+  const fixMileage = advert.mileage.toString().split('');
+  fixMileage.splice(1, 0, ',');
+
+  const mileageToShow = fixMileage.join('');
   const {
     id,
     year,
@@ -34,7 +38,6 @@ const CarCardModal = ({ advert, address }) => {
     functionalities,
     rentalPrice,
     rentalConditions,
-    mileage,
   } = advert;
 
   const conditions = rentalConditions.split(/\r?\n/);
@@ -80,7 +83,7 @@ const CarCardModal = ({ advert, address }) => {
           {conditions.map(condition => {
             return <ConditionsText key={nanoid()}>{condition}</ConditionsText>;
           })}
-          <ConditionsText>Mileage: {mileage}</ConditionsText>
+          <ConditionsText>Mileage: {mileageToShow}</ConditionsText>
           <ConditionsText>Price: {rentalPrice}</ConditionsText>
         </ConditionsThumb>
         <LinkThumb>

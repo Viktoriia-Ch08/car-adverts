@@ -53,7 +53,8 @@ export const Link = styled(NavLink)`
 `;
 
 export const Section = styled.section`
-  padding-top: 100px;
+  padding-top: 70px;
+  @media ${device.tablet} {
+    padding-top: 100px;
+  }
 `;
-
-export const LoaderThumb = styled.div``;

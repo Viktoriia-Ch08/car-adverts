@@ -1,4 +1,4 @@
-@import "./css/reset.css";
+@import './css/reset.css';
 
 .icon-car {
   display: inline-block;
@@ -21,13 +21,13 @@
 
 @media screen and (min-width: 768px) {
   .filter-select {
-    width: 180px;
+    width: 230px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .filter-select {
-    width: 150px;
+    width: 300px;
   }
 }
 

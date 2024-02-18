@@ -4,7 +4,11 @@ import { useEffect, useState } from 'react';
 
 import CatalogList from '../../components/CatalogList/CatalogList';
 import Loader from '../../components/Loader/Loader';
-import { refreshAdverts, setPageValue } from '../../redux/advertsSlice';
+import {
+  refreshAdverts,
+  resetFilters,
+  setPageValue,
+} from '../../redux/advertsSlice';
 import {
   selectAdverts,
   selectIsLastPage,
@@ -20,6 +24,7 @@ import {
 } from './Catalog.styled';
 import Filters from '../../components/Filters/Filters';
 import icons from '../../assets/images/sprite.svg';
+import { failedNotification } from '../../services/notification';
 
 const Catalog = () => {
   const dispatch = useDispatch();
@@ -45,7 +50,12 @@ const Catalog = () => {
         rentalPrice: priceFilter?.value,
         make: makeFilter?.value,
       })
-    );
+    )
+      .unwrap()
+      .catch(() => {
+        failedNotification("Sorry, we didn't find cars :( Try again!");
+        dispatch(resetFilters());
+      });
   }, [dispatch, page, makeFilter, priceFilter]);
 
   useEffect(() => {
@@ -75,17 +85,18 @@ const Catalog = () => {
               favorite={favorite}
               setFavorite={setFavorite}
             />
-            <CatalogLoadMoreBtn
-              disabled={isLastPage}
-              onClick={() => {
-                dispatch(setPageValue(page + 1));
-              }}
-            >
-              Load More
-              <CatalogLoadMoreBtnIcon>
-                <use href={`${icons}#icon-upload`}></use>
-              </CatalogLoadMoreBtnIcon>
-            </CatalogLoadMoreBtn>
+            {!isLastPage && (
+              <CatalogLoadMoreBtn
+                onClick={() => {
+                  dispatch(setPageValue(page + 1));
+                }}
+              >
+                Load More
+                <CatalogLoadMoreBtnIcon>
+                  <use href={`${icons}#icon-upload`}></use>
+                </CatalogLoadMoreBtnIcon>
+              </CatalogLoadMoreBtn>
+            )}
           </>
         )}
       </CatalogContainer>

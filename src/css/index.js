@@ -22,6 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     --text-clr-white: #fff;
     --text-clr-light-grey: #B2B1AF;
     --text-clr-second-light-grey: #A09F9D;
+    --home-page-text-clr: #D9D8D7;
 
     --favorite-icon: #f85d52;
 
@@ -43,7 +44,6 @@ body{
     background-color: var(--bg-clr) ;
     
 }
-/* #401641 */
 
 .main-container {
   width: 100%;
