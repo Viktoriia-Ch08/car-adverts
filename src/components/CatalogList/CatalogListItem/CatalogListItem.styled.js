@@ -6,12 +6,10 @@ export const Card = styled.li`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-
   gap: 15px;
-  font-family: var(--main-font-bold);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: var(--shadow);
 
   @media ${device.tablet} {
     width: calc((100% - 40px) / 3);
@@ -110,6 +108,7 @@ export const LearnMoreBtn = styled.button`
   font-weight: var(--font-weight-medium);
   color: var(--text-special-clr);
   background-color: var(--text-clr-black);
+  border: 2px solid var(--text-clr-light-grey);
 
   &:active {
     background-color: var(--btn-dark-hover-focus);

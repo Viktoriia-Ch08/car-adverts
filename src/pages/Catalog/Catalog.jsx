@@ -12,6 +12,7 @@ import { refreshAdverts, setPageValue } from '../../redux/advertsSlice';
 import {
   selectAdverts,
   selectIsLastPage,
+  selectIsLoading,
   selectPage,
 } from '../../redux/selectors';
 import {
@@ -21,10 +22,12 @@ import {
 } from './Catalog.styled';
 import Filters from '../../components/Filters/Filters';
 import icons from '../../assets/images/sprite.svg';
+import { InfinitySpin } from 'react-loader-spinner';
 
 const Catalog = () => {
   const dispatch = useDispatch();
   const page = useSelector(selectPage);
+  const isLoading = useSelector(selectIsLoading);
   const [chosenMake, setChosenMake] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [favorite, setFavorite] = useState([]);
@@ -68,7 +71,7 @@ const Catalog = () => {
   }, [dispatch, chosenMake, selectedOption]);
 
   return (
-    <section className="main-container">
+    <>
       <CatalogContainer>
         {adverts.length && (
           <>
@@ -97,7 +100,13 @@ const Catalog = () => {
           </>
         )}
       </CatalogContainer>
-    </section>
+      <InfinitySpin
+        visible={isLoading}
+        width="200"
+        color="#4fa94d"
+        ariaLabel="infinity-spin-loading"
+      />
+    </>
   );
 };
 

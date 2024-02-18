@@ -25,9 +25,6 @@ const CatalogListItem = ({ advert, favorite, setFavorite }) => {
 
   const address = advert.address.split(' ').slice(-2).join(' ');
 
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
-
   const isFavorite = favorite.some(localCar => localCar.id === advert.id);
 
   const fixMileage = advert.mileage.toString().split('');
@@ -83,10 +80,16 @@ const CatalogListItem = ({ advert, favorite, setFavorite }) => {
           </InfoText>
         </InfoCardWrap>
 
-        <LearnMoreBtn onClick={handleShow}>Learn More</LearnMoreBtn>
+        <LearnMoreBtn
+          onClick={() => {
+            setShow(true);
+          }}
+        >
+          Learn More
+        </LearnMoreBtn>
       </Card>
       {show && (
-        <UniversalModal show={show} handleClose={handleClose}>
+        <UniversalModal setShow={setShow}>
           <CarCardModal advert={advert} address={address} />
         </UniversalModal>
       )}

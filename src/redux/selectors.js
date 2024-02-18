@@ -10,3 +10,7 @@ export const selectIsLastPage = createSelector(
   cars => cars.isLastPage
 );
 export const selectPrices = createSelector(selectCars, cars => cars.prices);
+export const selectIsLoading = createSelector(
+  selectCars,
+  cars => cars.isLoading
+);

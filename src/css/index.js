@@ -1,35 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 import { device } from './deviceSizes';
-import Regular from '../assets/fonts/Montserrat-Regular.ttf';
-import Medium from '../assets/fonts/Montserrat-Medium.ttf';
-import Bold from '../assets/fonts/Montserrat-Bold.ttf';
 
 export const GlobalStyle = createGlobalStyle`
-
-//FONTS
-@font-face {
-    @font-face {
-    font-family: 'Montserrat';
-    src: url(${Regular}) format('truetype'),
-    }
-
-  @font-face {
-    font-family: 'Montserrat';
-    src: url(${Medium}) format('truetype'),
-    }
-
-  @font-face {
-    font-family: 'Montserrat';
-    src: url(${Bold}) format('truetype'),
-    }
-}
 
 
 //ROOT
 :root{
-    --main-font-regular: ${Regular};
-    --main-font-medium: ${Medium};
-    --main-font-bold: ${Bold};
+    --main-font-regular: "Work Sans", sans-serif;
 
     --font-size: 16px;
     --line-height: 1.25;
@@ -38,10 +15,13 @@ export const GlobalStyle = createGlobalStyle`
     --font-weight-bold: 700;
 
     --bg-clr:  #B2B1AF;
+    --modal-bg-clr: #e0dfdf;
     --text-special-clr:#f3e61d;
     --text-grey-clr: #4D5055;
     --text-clr-black: #2F2E30;
     --text-clr-white: #fff;
+    --text-clr-light-grey: #B2B1AF;
+    --text-clr-second-light-grey: #A09F9D;
 
     --favorite-icon: #f85d52;
 
@@ -51,10 +31,11 @@ export const GlobalStyle = createGlobalStyle`
     --hover-focus-trans: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
     --favorite-icon-clr:  #ff0000;
+    --shadow:  rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 body{
-    font-family: 'Montserrat ', sans-serif;
+    font-family: var(--main-font-regular);
     font-size: var(--font-size);
     font-weight: var(--font-weight-regular);
     line-height: var(--line-height);

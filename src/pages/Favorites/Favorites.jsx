@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import CatalogList from '../../components/CatalogList/CatalogList';
+import { FavoritesThumb } from './Favorites.styled';
 
 const Favorites = () => {
   const [favorite, setFavorite] = useState([]);
@@ -12,13 +13,13 @@ const Favorites = () => {
   }, []);
 
   return (
-    <section className="main-container">
+    <FavoritesThumb>
       <CatalogList
         favorite={favorite}
         setFavorite={setFavorite}
         data={favorite}
       />
-    </section>
+    </FavoritesThumb>
   );
 };
 

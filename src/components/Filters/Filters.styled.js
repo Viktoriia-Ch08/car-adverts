@@ -11,7 +11,7 @@ export const FiltersThumb = styled.div`
 
   @media ${device.tablet} {
     flex-direction: row;
-    gap: 30px;
+    gap: 45px;
     margin-bottom: 30px;
   }
 `;

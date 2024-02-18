@@ -1,6 +1,23 @@
 import { nanoid } from 'nanoid';
 import defaultImage from '../../../assets/images/defaultImg.png';
 import { useState } from 'react';
+import {
+  ModalBodyThumb,
+  ModalImg,
+  ModalImgThumb,
+  ModalInfoThumb,
+  ModalTitle,
+  Model,
+  ModalTextThumb,
+  ModalDescr,
+  SecondTitleModal,
+  AccessoriesFuncList,
+  AccessoriesFuncItem,
+  ConditionsThumb,
+  ConditionsText,
+  ModalLinkRent,
+  LinkThumb,
+} from './CarCardModal.styled';
 
 const CarCardModal = ({ advert, address }) => {
   const [imgUrl, setImgUrl] = useState(advert.img);
@@ -23,9 +40,9 @@ const CarCardModal = ({ advert, address }) => {
   const conditions = rentalConditions.split(/\r?\n/);
 
   return (
-    <>
-      <div>
-        <img
+    <ModalBodyThumb>
+      <ModalImgThumb>
+        <ModalImg
           src={imgUrl}
           onError={() => {
             setImgUrl(defaultImage);
@@ -34,40 +51,43 @@ const CarCardModal = ({ advert, address }) => {
           width={'250px'}
           height={'200px'}
         />
-      </div>
-      <h2>
-        {make} <span>{model}</span> {year}
-      </h2>
-      <div>
-        <p>{address}</p>
-        <p>Id:{id}</p>
-        <p>Year: {year}</p>
-        <p>Type: {type}</p>
-        <p>Fuel Consumption: {fuelConsumption}</p>
-        <p>Engine Size: {engineSize}</p>
-        <p>{description}</p>
-        <div>
-          <h3>Accessories and functionalities:</h3>
-          <div>
-            {accessories.map(element => {
-              return <p key={nanoid()}>{element}</p>;
-            })}
-            {functionalities.map(element => {
-              return <p key={nanoid()}>{element}</p>;
-            })}
-          </div>
-        </div>
-        <div>
-          <h3>Rental Conditions: </h3>
-          {conditions.map(condition => {
-            return <p key={nanoid()}>{condition}</p>;
+      </ModalImgThumb>
+      <ModalInfoThumb>
+        <ModalTitle>
+          {make} <Model>{model}</Model> {year}
+        </ModalTitle>
+        <ModalTextThumb>{`${address} | Id: ${id} | Year: ${year} | Type: ${type} | Fuel Consumption: ${fuelConsumption} | Engine Size: ${engineSize}`}</ModalTextThumb>
+        <ModalDescr>{description}</ModalDescr>
+        <SecondTitleModal>Accessories and functionalities:</SecondTitleModal>
+        <AccessoriesFuncList>
+          {accessories.map(element => {
+            return (
+              <AccessoriesFuncItem key={nanoid()}>
+                {element}
+              </AccessoriesFuncItem>
+            );
           })}
-          <p>Mileage: {mileage}</p>
-          <p>Price: {rentalPrice}</p>
-        </div>
-        <button>Rent Car</button>
-      </div>
-    </>
+          {functionalities.map(element => {
+            return (
+              <AccessoriesFuncItem key={nanoid()}>
+                {element}
+              </AccessoriesFuncItem>
+            );
+          })}
+        </AccessoriesFuncList>
+        <SecondTitleModal>Rental Conditions: </SecondTitleModal>
+        <ConditionsThumb>
+          {conditions.map(condition => {
+            return <ConditionsText key={nanoid()}>{condition}</ConditionsText>;
+          })}
+          <ConditionsText>Mileage: {mileage}</ConditionsText>
+          <ConditionsText>Price: {rentalPrice}</ConditionsText>
+        </ConditionsThumb>
+        <LinkThumb>
+          <ModalLinkRent href="tel:+380730000000">Rent Car</ModalLinkRent>
+        </LinkThumb>
+      </ModalInfoThumb>
+    </ModalBodyThumb>
   );
 };
 

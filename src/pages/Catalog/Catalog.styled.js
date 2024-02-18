@@ -17,7 +17,7 @@ export const CatalogLoadMoreBtn = styled.button`
   height: 40px;
   border-radius: 12px;
   font-size: 20px;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
   color: var(--text-clr-black);
   background-color: var(--text-special-clr);
   &:active {
