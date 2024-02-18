@@ -32,7 +32,6 @@ export const HomeContainer = styled.div`
 export const TextWrap = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 25px;
   padding: 15px;
   color: var(--home-page-text-clr);
