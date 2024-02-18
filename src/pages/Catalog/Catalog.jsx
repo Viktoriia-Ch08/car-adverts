@@ -4,11 +4,7 @@ import { useEffect, useState } from 'react';
 
 import CatalogList from '../../components/CatalogList/CatalogList';
 import Loader from '../../components/Loader/Loader';
-import {
-  refreshAdverts,
-  resetFilters,
-  setPageValue,
-} from '../../redux/advertsSlice';
+import { resetFilters, setPageValue } from '../../redux/advertsSlice';
 import {
   selectAdverts,
   selectIsLastPage,
@@ -38,10 +34,6 @@ const Catalog = () => {
   const isLoading = useSelector(selectIsLoading);
   const makeFilter = useSelector(selectMakeFilter);
   const priceFilter = useSelector(selectPriceFilter);
-
-  useEffect(() => {
-    dispatch(refreshAdverts());
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(

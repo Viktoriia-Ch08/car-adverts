@@ -19,6 +19,7 @@ const advertSlice = createSlice({
       state.page = action.payload;
     },
     resetFilters(state) {
+      state.adverts = [];
       state.priceFilter = null;
       state.makeFilter = null;
       state.page = 1;
