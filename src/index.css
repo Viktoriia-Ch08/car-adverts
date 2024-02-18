@@ -1,4 +1,4 @@
-@import './css/reset.css';
+@import "./css/reset.css";
 
 .icon-car {
   display: inline-block;
@@ -29,4 +29,11 @@
   .filter-select {
     width: 150px;
   }
+}
+
+.loader {
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
 }

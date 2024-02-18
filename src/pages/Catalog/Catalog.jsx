@@ -3,11 +3,11 @@ import {
   fetchAdvertsWithLimit,
   fetchMakes,
   fetchAllAdverts,
-  filterCars,
 } from '../../redux/operations';
 import { useEffect, useState } from 'react';
 
 import CatalogList from '../../components/CatalogList/CatalogList';
+import Loader from '../../components/Loader/Loader';
 import { refreshAdverts, setPageValue } from '../../redux/advertsSlice';
 import {
   selectAdverts,
@@ -22,7 +22,6 @@ import {
 } from './Catalog.styled';
 import Filters from '../../components/Filters/Filters';
 import icons from '../../assets/images/sprite.svg';
-import { Oval } from 'react-loader-spinner';
 
 const Catalog = () => {
   const dispatch = useDispatch();
@@ -30,10 +29,10 @@ const Catalog = () => {
   const [chosenMake, setChosenMake] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [favorite, setFavorite] = useState([]);
-  const isLoading = useSelector(selectIsLoading);
 
   const adverts = useSelector(selectAdverts);
   const isLastPage = useSelector(selectIsLastPage);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(refreshAdverts());
@@ -62,7 +61,7 @@ const Catalog = () => {
   return (
     <>
       <CatalogContainer>
-        {adverts.length && (
+        {adverts.length > 0 && (
           <>
             <Filters
               selectedOption={selectedOption}
@@ -89,14 +88,7 @@ const Catalog = () => {
           </>
         )}
       </CatalogContainer>
-
-      <Oval
-        className="loader"
-        visible={isLoading}
-        width="300"
-        color="var(--text-special-clr)"
-        ariaLabel="infinity-spin-loading"
-      />
+      <Loader isLoading={isLoading} />
     </>
   );
 };
