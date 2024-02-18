@@ -18,6 +18,7 @@ import {
 } from './CatalogListItem.styled';
 import { saveToLocalStorage } from '../../../services/localStorage';
 import icons from '../../../assets/images/sprite.svg';
+import { addScrollLock } from '../../../services/bodyScroll';
 
 const CatalogListItem = ({ advert, favorite, setFavorite }) => {
   const [show, setShow] = useState(false);
@@ -83,6 +84,7 @@ const CatalogListItem = ({ advert, favorite, setFavorite }) => {
         <LearnMoreBtn
           onClick={() => {
             setShow(true);
+            addScrollLock();
           }}
         >
           Learn More
