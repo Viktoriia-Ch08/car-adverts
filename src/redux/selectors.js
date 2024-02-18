@@ -14,3 +14,5 @@ export const selectIsLoading = createSelector(
   selectCars,
   cars => cars.isLoading
 );
+
+export const selectError = createSelector(selectCars, cars => cars.error);

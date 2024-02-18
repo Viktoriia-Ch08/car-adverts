@@ -59,17 +59,6 @@ const Catalog = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const price = selectedOption ? selectedOption.value : '';
-    const make = chosenMake ? chosenMake.value : '';
-    dispatch(
-      filterCars({
-        rentalPrice: price,
-        make: make,
-      })
-    );
-  }, [dispatch, chosenMake, selectedOption]);
-
   return (
     <>
       <CatalogContainer>

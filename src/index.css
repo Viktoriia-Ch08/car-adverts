@@ -21,12 +21,12 @@
 
 @media screen and (min-width: 768px) {
   .filter-select {
-    width: 230px;
+    width: 180px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .filter-select {
-    width: 300px;
+    width: 150px;
   }
 }

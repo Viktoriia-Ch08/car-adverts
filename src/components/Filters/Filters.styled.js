@@ -11,7 +11,7 @@ export const FiltersThumb = styled.div`
 
   @media ${device.tablet} {
     flex-direction: row;
-    gap: 45px;
+    gap: 20px;
     margin-bottom: 30px;
   }
 `;
@@ -24,12 +24,12 @@ export const FiltersWrap = styled.div`
   gap: 10px;
   @media ${device.tablet} {
     flex-direction: row;
-    gap: 30px;
+    gap: 20px;
   }
 `;
 
 export const FilterButton = styled.button`
-  width: 300px;
+  width: 120px;
   height: 40px;
   border-radius: 12px;
   font-size: 18px;
@@ -41,8 +41,13 @@ export const FilterButton = styled.button`
     background-color: var(--btn-yellow-hover-focus);
   }
 
+  &:disabled {
+    background-color: var(--text-clr-second-light-grey);
+    border: 1px solid var(--text-clr-black);
+  }
+
   @media ${device.tablet} {
-    width: 200px;
+    width: 150px;
     transform: background-color var(--hover-focus-trans);
     &:hover,
     &:focus {
@@ -53,4 +58,9 @@ export const FilterButton = styled.button`
   @media ${device.desktop} {
     width: 260px;
   }
+`;
+
+export const FiltersBtnWrap = styled.div`
+  display: flex;
+  gap: 10px;
 `;

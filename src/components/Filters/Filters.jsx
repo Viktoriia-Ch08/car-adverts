@@ -1,5 +1,10 @@
 import { filterCars } from '../../redux/operations';
-import { FilterButton, FiltersThumb, FiltersWrap } from './Filters.styled';
+import {
+  FilterButton,
+  FiltersBtnWrap,
+  FiltersThumb,
+  FiltersWrap,
+} from './Filters.styled';
 import MakesFilter from './MakesFilter';
 import PriceFilter from './PriceFilter';
 import { useDispatch } from 'react-redux';
@@ -11,6 +16,17 @@ const Filters = ({
   setSelectedOption,
 }) => {
   const dispatch = useDispatch();
+
+  const handleFilters = () => {
+    const price = selectedOption ? selectedOption.value : '';
+    const make = chosenMake ? chosenMake.value : '';
+    dispatch(
+      filterCars({
+        rentalPrice: price,
+        make: make,
+      })
+    );
+  };
 
   const resetFilters = () => {
     dispatch(
@@ -45,9 +61,18 @@ const Filters = ({
           style={style}
         />
       </FiltersWrap>
-      <FilterButton type="button" onClick={resetFilters}>
-        Reset
-      </FilterButton>
+      <FiltersBtnWrap>
+        <FilterButton
+          type="button"
+          onClick={handleFilters}
+          disabled={!chosenMake && !selectedOption}
+        >
+          Search
+        </FilterButton>
+        <FilterButton type="button" onClick={resetFilters}>
+          Reset
+        </FilterButton>
+      </FiltersBtnWrap>
     </FiltersThumb>
   );
 };
