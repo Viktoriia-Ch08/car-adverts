@@ -1,4 +1,5 @@
 import { filterCars } from '../../redux/operations';
+import { failedNotification } from '../../services/notification';
 import {
   FilterButton,
   FiltersBtnWrap,
@@ -25,7 +26,11 @@ const Filters = ({
         rentalPrice: price,
         make: make,
       })
-    );
+    )
+      .unwrap()
+      .catch(() => {
+        failedNotification('Sorry, we didn`t find any cars');
+      });
   };
 
   const resetFilters = () => {
