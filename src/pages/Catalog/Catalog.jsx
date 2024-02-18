@@ -1,39 +1,39 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAdvertsWithLimit,
   fetchMakes,
   fetchAllAdverts,
   filterCars,
-} from '../../redux/operations';
-import { useEffect, useState } from 'react';
+} from "../../redux/operations";
+import { useEffect, useState } from "react";
 
-import CatalogList from '../../components/CatalogList/CatalogList';
-import { refreshAdverts, setPageValue } from '../../redux/advertsSlice';
+import CatalogList from "../../components/CatalogList/CatalogList";
+import Loader from "../../components/Loader/Loader";
+import { refreshAdverts, setPageValue } from "../../redux/advertsSlice";
 import {
   selectAdverts,
   selectIsLastPage,
   selectIsLoading,
   selectPage,
-} from '../../redux/selectors';
+} from "../../redux/selectors";
 import {
   CatalogContainer,
   CatalogLoadMoreBtn,
   CatalogLoadMoreBtnIcon,
-} from './Catalog.styled';
-import Filters from '../../components/Filters/Filters';
-import icons from '../../assets/images/sprite.svg';
-import { Oval } from 'react-loader-spinner';
+} from "./Catalog.styled";
+import Filters from "../../components/Filters/Filters";
+import icons from "../../assets/images/sprite.svg";
 
 const Catalog = () => {
   const dispatch = useDispatch();
   const page = useSelector(selectPage);
-  const [chosenMake, setChosenMake] = useState('');
-  const [selectedOption, setSelectedOption] = useState('');
+  const [chosenMake, setChosenMake] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   const [favorite, setFavorite] = useState([]);
-  const isLoading = useSelector(selectIsLoading);
 
   const adverts = useSelector(selectAdverts);
   const isLastPage = useSelector(selectIsLastPage);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(refreshAdverts());
@@ -53,15 +53,15 @@ const Catalog = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('favorite'));
+    const items = JSON.parse(localStorage.getItem("favorite"));
     if (items) {
       setFavorite(items);
     }
   }, []);
 
   useEffect(() => {
-    const price = selectedOption ? selectedOption.value : '';
-    const make = chosenMake ? chosenMake.value : '';
+    const price = selectedOption ? selectedOption.value : "";
+    const make = chosenMake ? chosenMake.value : "";
     dispatch(
       filterCars({
         rentalPrice: price,
@@ -73,7 +73,7 @@ const Catalog = () => {
   return (
     <>
       <CatalogContainer>
-        {adverts.length && (
+        {adverts.length > 0 && (
           <>
             <Filters
               selectedOption={selectedOption}
@@ -100,14 +100,7 @@ const Catalog = () => {
           </>
         )}
       </CatalogContainer>
-
-      <Oval
-        className="loader"
-        visible={isLoading}
-        width="300"
-        color="var(--text-special-clr)"
-        ariaLabel="infinity-spin-loading"
-      />
+      <Loader isLoading={isLoading} />
     </>
   );
 };
