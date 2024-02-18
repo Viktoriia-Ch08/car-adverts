@@ -22,15 +22,15 @@ import {
 } from './Catalog.styled';
 import Filters from '../../components/Filters/Filters';
 import icons from '../../assets/images/sprite.svg';
-import { InfinitySpin } from 'react-loader-spinner';
+import { Oval } from 'react-loader-spinner';
 
 const Catalog = () => {
   const dispatch = useDispatch();
   const page = useSelector(selectPage);
-  const isLoading = useSelector(selectIsLoading);
   const [chosenMake, setChosenMake] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [favorite, setFavorite] = useState([]);
+  const isLoading = useSelector(selectIsLoading);
 
   const adverts = useSelector(selectAdverts);
   const isLastPage = useSelector(selectIsLastPage);
@@ -100,10 +100,12 @@ const Catalog = () => {
           </>
         )}
       </CatalogContainer>
-      <InfinitySpin
+
+      <Oval
+        className="loader"
         visible={isLoading}
-        width="200"
-        color="#4fa94d"
+        width="300"
+        color="var(--text-special-clr)"
         ariaLabel="infinity-spin-loading"
       />
     </>

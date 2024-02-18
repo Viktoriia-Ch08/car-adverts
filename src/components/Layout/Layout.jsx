@@ -1,9 +1,13 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Link, NavBar, NavBarThumb, Section } from './Layout.styled';
+import { Oval } from 'react-loader-spinner';
+import { useSelector } from 'react-redux';
+import { selectIsLoading } from '../../redux/selectors';
 
 const Layout = () => {
   const location = useLocation();
+  const isLoading = useSelector(selectIsLoading);
   return (
     <>
       <header>
@@ -29,7 +33,17 @@ const Layout = () => {
       </header>
       <main>
         <Section className="main-container">
-          <Suspense fallback={null}>
+          <Suspense
+            fallback={
+              <Oval
+                className="loader"
+                visible={isLoading}
+                width="300"
+                color="var(--text-special-clr)"
+                ariaLabel="infinity-spin-loading"
+              />
+            }
+          >
             <Outlet />
           </Suspense>
         </Section>

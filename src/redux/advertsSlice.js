@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   fetchAdvertsWithLimit,
   fetchMakes,
@@ -16,7 +16,6 @@ const advertSlice = createSlice({
     page: 1,
     isLoading: false,
     error: null,
-    filter: '',
     isLastPage: false,
   },
   reducers: {
@@ -56,7 +55,31 @@ const advertSlice = createSlice({
             return a - b;
           });
         state.isLoading = false;
-      });
+      })
+      .addMatcher(
+        isAnyOf(
+          fetchAdvertsWithLimit.pending,
+          fetchMakes.pending,
+          filterCars.pending,
+          fetchAllAdverts.pending
+        ),
+        state => {
+          state.isLoading = true;
+          state.error = null;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          fetchAdvertsWithLimit.rejected,
+          fetchMakes.rejected,
+          filterCars.rejected,
+          fetchAllAdverts.rejected
+        ),
+        (state, action) => {
+          state.isLoading = false;
+          state.error = action.payload;
+        }
+      );
   },
 });
 
