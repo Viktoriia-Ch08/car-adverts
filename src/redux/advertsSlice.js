@@ -48,7 +48,7 @@ const advertSlice = createSlice({
         state.isLastPage = action.payload.length < LIMIT_PER_PAGE;
       })
       .addCase(fetchMakes.fulfilled, (state, action) => {
-        state.makes = action.payload;
+        state.makes = action.payload.sort((a, b) => a.localeCompare(b));
         state.isLoading = false;
       })
 
