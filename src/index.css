@@ -47,3 +47,14 @@
   stroke: var(--text-clr-black);
   fill: var(--favorite-icon-red);
 }
+
+.close-btn {
+  fill: var(--text-clr-black);
+  transform: fill var(--hover-focus-trans);
+}
+
+.close-btn:active,
+.close-btn:focus,
+.close-btn:hover {
+  fill: var(--text-special-clr);
+}

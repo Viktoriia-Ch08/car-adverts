@@ -31,7 +31,6 @@ export const ModalCloseBtn = styled.button`
   position: absolute;
   top: 15px;
   right: 20px;
-  transform: fill var(--hover-focus-trans);
 
   &:active,
   &:focus,
