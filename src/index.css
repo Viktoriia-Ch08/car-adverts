@@ -37,3 +37,13 @@
   right: 50%;
   transform: translate(50%, -50%);
 }
+
+.heart {
+  stroke: var(--text-clr-white);
+  fill: var(--text-clr-white);
+}
+
+.favorite-icon {
+  stroke: var(--favorite-icon-red);
+  fill: var(--favorite-icon-red);
+}

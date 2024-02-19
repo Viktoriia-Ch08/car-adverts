@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
     --text-clr-second-light-grey: #A09F9D;
     --home-page-text-clr: #D9D8D7;
 
-    --favorite-icon: #f85d52;
+    --favorite-icon-red: #f85d52;
 
     --select-focus-within: #26282A;
     --btn-dark-hover-focus: #4D5055;

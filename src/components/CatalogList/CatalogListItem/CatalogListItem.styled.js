@@ -44,11 +44,6 @@ export const LoveBtn = styled.button`
   backdrop-filter: blur(1px);
   border: 1px solid var(--text-clr-black);
   border-radius: 8px;
-  fill: var(--text-clr-white);
-  stroke: var(--text-clr-black);
-  &.favorite {
-    fill: var(--favorite-icon-clr);
-  }
 `;
 
 export const LoveBtnIcon = styled.svg`
