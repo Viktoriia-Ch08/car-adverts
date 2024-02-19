@@ -73,7 +73,7 @@ const CatalogListItem = ({ advert, favorite, setFavorite }) => {
             <Title>
               {advert.make} <Model>{advert.model}</Model> {advert.year}
             </Title>
-            <Price>${advert.rentalPrice}</Price>
+            <Price>{advert.rentalPrice}</Price>
           </TitleInfoWrap>
 
           <InfoText>
