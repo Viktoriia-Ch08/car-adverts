@@ -45,6 +45,10 @@ body{
     
 }
 
+a, button, input {
+  cursor: pointer;
+}
+
 .no-scroll {
   overflow: hidden;
 }

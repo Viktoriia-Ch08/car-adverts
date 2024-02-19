@@ -20,6 +20,7 @@ const Filters = () => {
       ...base,
       border: 0,
       boxShadow: 'none',
+      cursor: 'pointer',
     }),
   };
 
