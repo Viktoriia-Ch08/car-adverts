@@ -1,4 +1,4 @@
-import{u as o,d as s,r as g,j as e}from"./index-4gGoM0Rj.js";const S="useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict";let h=(t=21)=>{let i="",n=crypto.getRandomValues(new Uint8Array(t));for(;t--;)i+=S[n[t]&63];return i};const C="/car-adverts/assets/defaultImg-BDyUtCgQ.png",L=o.div`
+import{u as o,d as s,r as g,j as e}from"./index-BgZCFLQ9.js";const S="useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict";let h=(t=21)=>{let i="",n=crypto.getRandomValues(new Uint8Array(t));for(;t--;)i+=S[n[t]&63];return i};const C="/car-adverts/assets/defaultImg-BDyUtCgQ.png",L=o.div`
   padding-top: 45px;
   padding-left: 10px;
   padding-right: 10px;
@@ -175,8 +175,8 @@ import{u as o,d as s,r as g,j as e}from"./index-4gGoM0Rj.js";const S="useandom-2
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   backdrop-filter: blur(1px);
   border: 1px solid var(--text-clr-black);
   border-radius: 8px;
