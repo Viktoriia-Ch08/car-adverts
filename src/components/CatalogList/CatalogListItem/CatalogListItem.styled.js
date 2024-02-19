@@ -39,8 +39,8 @@ export const LoveBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   backdrop-filter: blur(1px);
   border: 1px solid var(--text-clr-black);
   border-radius: 8px;
