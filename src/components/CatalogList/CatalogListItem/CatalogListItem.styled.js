@@ -36,14 +36,6 @@ export const LoveBtn = styled.button`
   position: absolute;
   top: 10px;
   right: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  backdrop-filter: blur(1px);
-  border: 1px solid var(--text-clr-black);
-  border-radius: 8px;
 `;
 
 export const LoveBtnIcon = styled.svg`
