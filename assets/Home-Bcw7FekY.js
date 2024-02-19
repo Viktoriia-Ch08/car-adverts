@@ -1,4 +1,4 @@
-import{u as t,d as a,a as o,r as s,b as c,j as e}from"./index-B6D9lLcb.js";const i="/car-adverts/assets/bg-BNlP7cxL.jpg",l=t.div`
+import{u as t,d as a,a as o,r as s,b as c,j as e}from"./index-nlUAjyU9.js";const i="/car-adverts/assets/bg-BNlP7cxL.jpg",l=t.div`
   background-image: linear-gradient(
       rgba(47, 46, 48, 0.5),
       rgba(47, 46, 48, 0.5)
