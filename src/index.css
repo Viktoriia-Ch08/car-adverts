@@ -39,11 +39,11 @@
 }
 
 .heart {
-  stroke: var(--text-clr-white);
+  stroke: var(--text-clr-black);
   fill: var(--text-clr-white);
 }
 
 .favorite-icon {
-  stroke: var(--favorite-icon-red);
+  stroke: var(--text-clr-black);
   fill: var(--favorite-icon-red);
 }
