@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import CatalogList from '../../components/CatalogList/CatalogList';
 import { FavoritesThumb } from './Favorites.styled';
 import { useDispatch } from 'react-redux';
-import { refreshAdverts } from '../../redux/advertsSlice';
+import { resetFilters } from '../../redux/advertsSlice';
 
 const Favorites = () => {
   const [favorite, setFavorite] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(refreshAdverts());
+    dispatch(resetFilters());
   }, [dispatch]);
 
   useEffect(() => {

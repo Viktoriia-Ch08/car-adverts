@@ -34,13 +34,6 @@ const advertSlice = createSlice({
       state.makeFilter = action.payload;
       state.page = 1;
     },
-    refreshAdverts(state) {
-      state.adverts = [];
-      state.isLoading = false;
-      state.page = 1;
-      state.priceFilter = null;
-      state.makeFilter = null;
-    },
   },
   extraReducers: builder => {
     builder
@@ -72,7 +65,6 @@ const advertSlice = createSlice({
 export const advertsReducer = advertSlice.reducer;
 export const {
   setPageValue,
-  refreshAdverts,
   setMakeFilterValue,
   resetFilters,
   setPriceFilterValue,

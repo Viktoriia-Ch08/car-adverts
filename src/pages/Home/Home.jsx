@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { HomeContainer, HomeText, MainTitle, TextWrap } from './Home.styled';
 import { useEffect } from 'react';
-import { refreshAdverts } from '../../redux/advertsSlice';
+import { resetFilters } from '../../redux/advertsSlice';
 
 const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(refreshAdverts());
+    dispatch(resetFilters());
   }, [dispatch]);
 
   return (
