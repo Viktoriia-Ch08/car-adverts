@@ -1,4 +1,5 @@
 import { resetFilters } from '../../redux/advertsSlice';
+import { selectMakeFilter, selectPriceFilter } from '../../redux/selectors';
 import {
   FilterButton,
   FiltersBtnWrap,
@@ -7,10 +8,12 @@ import {
 } from './Filters.styled';
 import MakesFilter from './MakesFilter';
 import PriceFilter from './PriceFilter';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Filters = () => {
   const dispatch = useDispatch();
+  const makeFilter = useSelector(selectMakeFilter);
+  const priceFilter = useSelector(selectPriceFilter);
 
   const style = {
     control: base => ({
@@ -27,7 +30,11 @@ const Filters = () => {
         <PriceFilter style={style} />
       </FiltersWrap>
       <FiltersBtnWrap>
-        <FilterButton type="button" onClick={() => dispatch(resetFilters())}>
+        <FilterButton
+          type="button"
+          onClick={() => dispatch(resetFilters())}
+          disabled={priceFilter === null && makeFilter === null}
+        >
           Reset
         </FilterButton>
       </FiltersBtnWrap>

@@ -25,15 +25,18 @@ import { failedNotification } from '../../services/notification';
 const Catalog = () => {
   const dispatch = useDispatch();
   const page = useSelector(selectPage);
-  const [chosenMake, setChosenMake] = useState('');
-  const [selectedOption, setSelectedOption] = useState('');
   const [favorite, setFavorite] = useState([]);
-
   const adverts = useSelector(selectAdverts);
   const isLastPage = useSelector(selectIsLastPage);
   const isLoading = useSelector(selectIsLoading);
   const makeFilter = useSelector(selectMakeFilter);
   const priceFilter = useSelector(selectPriceFilter);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetFilters());
+    };
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(
@@ -66,12 +69,7 @@ const Catalog = () => {
       <CatalogContainer>
         {adverts.length > 0 && (
           <>
-            <Filters
-              selectedOption={selectedOption}
-              setSelectedOption={setSelectedOption}
-              setChosenMake={setChosenMake}
-              chosenMake={chosenMake}
-            />
+            <Filters />
             <CatalogList
               data={adverts}
               favorite={favorite}

@@ -1,15 +1,6 @@
-import { useDispatch } from 'react-redux';
 import { HomeContainer, HomeText, MainTitle, TextWrap } from './Home.styled';
-import { useEffect } from 'react';
-import { resetFilters } from '../../redux/advertsSlice';
 
 const Home = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(resetFilters());
-  }, [dispatch]);
-
   return (
     <HomeContainer>
       <TextWrap>
